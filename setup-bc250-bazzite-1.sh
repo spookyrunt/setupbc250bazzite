@@ -16,10 +16,16 @@ rpm-ostree kargs --append-if-missing=amd_iommu=off
 rpm-ostree kargs --append-if-missing=quiet
 
 # kernel parameters for maximum GPU memory access (16GB / full physical pool)
+DELETE_ARGS=()
+for karg in $(rpm-ostree kargs); do
+  case "$karg" in
+  amdgpu.gttsize=* | ttm.pages_limit=* | ttm.page_pool_size=*)
+    DELETE_ARGS+=("--delete=$karg")
+    ;;
+  esac
+done
 rpm-ostree kargs \
-  --delete-if-present="amdgpu.gttsize=14750" \
-  --delete-if-present="ttm.pages_limit=3959290" \
-  --delete-if-present="ttm.page_pool_size=3959290" \
+  "${DELETE_ARGS[@]}" \
   --append="ttm.pages_limit=4194304" \
   --append="ttm.page_pool_size=4194304"
 
