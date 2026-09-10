@@ -4,10 +4,12 @@ set -euo pipefail
 # https://elektricm.github.io/amd-bc250-docs/bios/flashing/#post-flash-configuration
 
 # memcfg
-git clone https://github.com/fanoush/bc250_memcfg
-cd bc250_memcfg
-make
-sudo ./bc250memcfg UMA_SIZE 512
+[ -d bc250_memcfg ] || git clone https://github.com/fanoush/bc250_memcfg
+(
+  cd bc250_memcfg
+  make
+  sudo ./bc250memcfg UMA_SIZE 512
+)
 
 # amd iommu off
 rpm-ostree kargs --append-if-missing=amd_iommu=off

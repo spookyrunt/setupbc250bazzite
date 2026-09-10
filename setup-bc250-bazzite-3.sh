@@ -12,8 +12,8 @@ if [ "$CORES" -ne 8 ]; then
 fi
 
 # cpu overclock
-[ -d ~/bc250_smu_oc ] || git clone https://github.com/bc250-collective/bc250_smu_oc.git ~/bc250_smu_oc
-cd ~/bc250_smu_oc
+[ -d bc250_smu_oc ] || git clone https://github.com/bc250-collective/bc250_smu_oc.git
+cd bc250_smu_oc
 pipx install --force .
 bc250-detect --frequency 3900 --vid 1300
 bc250-apply --install overclock.conf
