@@ -64,6 +64,7 @@ BC250_ASSUME_YES=1 ./install.sh mem
 
 # watchdog: optional: resets hardlock and logs heartbeat (sensor temperature/power tracking)
 BC250_ASSUME_YES=1 ./install.sh watchdog
+# sudo systemctl disable --now bc250-hb.service # turn off watchdog
 
 echo ""
 echo "Done. Please reboot."
