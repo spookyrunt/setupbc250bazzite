@@ -2,3 +2,5 @@ bc250-core-cu-unlock/
 bc250-acpi-fix-updated-8c/
 bc250_memcfg/
 bc250-cu-live-manager.sh
+bc250-buddy/
+bc250_smu_oc/

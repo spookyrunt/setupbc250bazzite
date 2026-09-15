@@ -14,6 +14,9 @@ fi
 # cpu overclock
 [ -d bc250_smu_oc ] || git clone https://github.com/bc250-collective/bc250_smu_oc.git
 cd bc250_smu_oc
+python3 -m pip install --user pipx
+python3 -m pipx ensurepath
+brew install stress
 pipx install --force .
 bc250-detect --frequency 3900 --vid 1300
 bc250-apply --install overclock.conf
