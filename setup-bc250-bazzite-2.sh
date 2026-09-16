@@ -49,10 +49,14 @@ sudo systemctl start cyan-skillfish-governor-smu
 cd ..
 
 # 24+ ~40 cu gpu unlock
-curl -L -o bc250-cu-live-manager.sh https://raw.githubusercontent.com/WinnieLV/bc250-cu-live-manager/refs/heads/main/bc250-cu-live-manager.sh
+curl -fL -o bc250-cu-live-manager.sh https://raw.githubusercontent.com/WinnieLV/bc250-cu-live-manager/refs/heads/main/bc250-cu-live-manager.sh
 chmod +x bc250-cu-live-manager.sh
 echo ""
-echo "Note: e - w - i - q witin the following bc250-cu-live-manager.sh"
+echo "========="
+echo "Note: The manager will start now."
+echo "Use e, w, i, and q in that order when prompted."
+echo "If something goes wrong, restart it with ./bc250-cu-live-manager.sh"
+echo "========="
 read -p "Press enter to continue..."
 sudo ./bc250-cu-live-manager.sh
 
@@ -62,10 +66,20 @@ cd bc250-buddy
 
 # zswap + btrfs swapfile
 BC250_ASSUME_YES=1 ./install.sh mem
+# this may reboot the system following the user input
 
 # watchdog: optional: resets hardlock and logs heartbeat (sensor temperature/power tracking)
-BC250_ASSUME_YES=1 ./install.sh watchdog
-# sudo systemctl disable --now bc250-hb.service # turn off watchdog
+echo ""
+echo "The watchdog monitors sensor temperature and power."
+echo "You can disable it later with:"
+echo "  sudo systemctl disable --now bc250-hb.service"
+echo ""
+read -p "Install the watchdog? [y/N] " answer
+case "$answer" in
+y | Y)
+  BC250_ASSUME_YES=1 ./install.sh watchdog
+  ;;
+esac
 
 echo ""
 echo "Done. Please reboot."
