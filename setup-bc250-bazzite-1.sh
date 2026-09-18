@@ -29,9 +29,9 @@ rpm-ostree kargs \
   --append="ttm.pages_limit=4194304" \
   --append="ttm.page_pool_size=4194304"
 
-# gpu governor & radeontop & umr for 40cu unlock
+# gpu governor & radeontop & rocm-smi for btop & umr for 40cu unlock
 sudo dnf copr enable filippor/bazzite -y
-rpm-ostree install cyan-skillfish-governor-smu radeontop umr
+rpm-ostree install cyan-skillfish-governor-smu radeontop rocm-smi umr
 
 # acpi fix (C-states only, P-states doesn't work per upstream README)
 [ -d bc250-acpi-fix-updated-8c ] || git clone https://github.com/mendesrr/bc250-acpi-fix-updated-8c
